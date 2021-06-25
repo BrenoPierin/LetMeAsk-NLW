@@ -14,7 +14,7 @@ import { useAuth } from '../hooks/useAuth';
 
 export function Home() {
     const history = useHistory();
-    const { signinWhitGoogle, user} = useAuth()
+    const { signinWhitGoogle, user} = useAuth();
     const [roomCode, setRoomCode] = useState('');
     
     async function handleCrateRoom() {
@@ -30,11 +30,13 @@ export function Home() {
         event.preventDefault();
 
         if (roomCode.trim() == '') {
+            console.log('adoadoado');
             return;
         }
 
-        const roomRef = await database.ref(`rooms/${roomCode}`).get();
-
+        
+        const roomRef = await database.ref(`/rooms/${roomCode}`).get();
+        
         if (!roomRef.exists()) {
             alert('Room does not exists. Type another code and try again!')
             return;
